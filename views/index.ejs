@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>JLPT N3 Quiz</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <h1>JLPT N3 Quiz</h1>
+  <form action="/submit" method="post">
+    <% questions.forEach((question, index) => { %>
+      <div>
+        <p><%= question.question %></p>
+        <% question.choices.forEach((choice, i) => { %>
+          <label>
+            <input type="radio" name="answers[<%= index %>]" value="<%= i %>" required>
+            <%= choice %>
+          </label>
+        <% }) %>
+      </div>
+    <% }) %>
+    <button type="submit">Submit</button>
+  </form>
+</body>
+</html>

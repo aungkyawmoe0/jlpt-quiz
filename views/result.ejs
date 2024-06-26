@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz Result</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <h1>Quiz Result</h1>
+  <p>Your score: <%= score %> / <%= total %></p>
+  <% if (pass) { %>
+    <p>Congratulations! You passed!</p>
+    <a href="/purchase">Purchase Certificate</a>
+  <% } else { %>
+    <p>Sorry, you failed. Try again.</p>
+  <% } %>
+  <h2>Review Your Answers:</h2>
+  <ul>
+    <% questions.forEach((question, index) => { %>
+      <li>
+        <p><%= question.question %></p>
+        <p>Your answer: <%= question.choices[answers[index].answer] %></p>
+        <p>Correct answer: <%= question.choices[question.correctAnswer] %></p>
+        <% if (answers[index].correct) { %>
+          <p style="color: green;">Correct</p>
+        <% } else { %>
+          <p style="color: red;">Incorrect</p>
+        <% } %>
+      </li>
+    <% }) %>
+  </ul>
+  <form action="/retry" method="post">
+    <button type="submit">Try Again</button>
+  </form>
+</body>
+</html>
